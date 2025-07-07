@@ -1,3 +1,22 @@
+import streamlit as st
+from dotenv import load_dotenv  # API KEY를 환경변수로 관리하기 위한 설정 파일
+from langchain_core.messages.chat import ChatMessage
+from langchain_core.prompts import ChatPromptTemplate  # 프롬프트 템플릿
+from langchain_openai import ChatOpenAI  # llm
+from langchain_core.output_parsers import StrOutputParser  # Output Parser
+from langchain_core.prompts import load_prompt  # 프롬프트 로드
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import PyMuPDFLoader
+from langchain_community.vectorstores import FAISS
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.prompts import PromptTemplate
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_teddynote import logging
+
+
+logging.langsmith("[Project]PDF RAG")
+
 def embed_file(file):
     # 업로드한 파일을 캐시 디렉토리에 저장합니다.
     file_content = file.read()
